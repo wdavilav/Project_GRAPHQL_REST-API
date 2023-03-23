@@ -10,6 +10,12 @@ class ProductListAPIView(ListAPIView):
     serializer_class = ProductSerializers
     permission_classes = [AllowAny]
 
+
+class ProductListByIdAPIView(ListAPIView):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializers
+    permission_classes = [AllowAny]
+
     def get_queryset(self):
         if 'pk' in self.kwargs:
             return self.queryset.filter(id=self.kwargs['pk'])
