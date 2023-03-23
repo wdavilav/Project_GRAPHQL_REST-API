@@ -17,7 +17,8 @@ class ProductListByIdAPIView(ListAPIView):
     permission_classes = [AllowAny]
 
     def get_queryset(self):
-        return self.queryset.filter(id=self.kwargs['pk'])
+        id = self.kwargs['id']
+        return self.queryset.filter(id=id)
 
 
 class ProductListByCategoryAPIView(ListAPIView):
