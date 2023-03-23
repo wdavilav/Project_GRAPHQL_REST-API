@@ -16,7 +16,7 @@ with open(f'{settings.BASE_DIR}/resources/products.json', encoding='utf8') as js
         product = Product()
         product.name = item['name']
         product.code = item['code']
-        product.category = Category.objects.get_or_create(name=item['category'])
+        product.category = Category.objects.get_or_create(name=item['category'])[0]
         product.price = float(item['price'])
         product.pvp = float(item['pvp'])
         product.stock = random.randint(50, 150)

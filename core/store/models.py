@@ -1,4 +1,5 @@
 from django.db import models
+from django.forms import model_to_dict
 
 
 class Category(models.Model):
@@ -6,6 +7,9 @@ class Category(models.Model):
 
     def __str__(self):
         return self.name
+
+    def toJSON(self):
+        return model_to_dict(self)
 
     class Meta:
         verbose_name = 'Categoría'
@@ -21,6 +25,12 @@ class Product(models.Model):
 
     def __str__(self):
         return self.name
+
+    def toJSON(self):
+        item = model_to_dict(self)
+        item['category'] = self.category.toJSON()
+        item['price'] = float(self.price)
+        return item
 
     class Meta:
         verbose_name = 'Producto'
