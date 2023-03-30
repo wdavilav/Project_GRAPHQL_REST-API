@@ -54,3 +54,5 @@ python manage.py migrate
 ```bash
 - `python manage.py shell --command='from core.init import *'`
 ```
+## Tutorial de GraphQL con Django
+https://docs.graphene-python.org/projects/django/en/latest/installation/
