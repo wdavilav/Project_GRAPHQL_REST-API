@@ -22,12 +22,14 @@ class ProductType(DjangoObjectType):
 
 
 class Query(graphene.ObjectType):
-    all_products = graphene.List(ProductType)
+    all_products = graphene.List(ProductType, id=graphene.Int())
     all_products_by_category = graphene.List(ProductType, category=graphene.String(required=True))
     category_by_name = graphene.Field(CategoryType, name=graphene.String(required=True))
 
-    def resolve_all_products(root, info):
-        return Product.objects.all()
+    def resolve_all_products(root, info, id=None):
+        if id is None:
+            return Product.objects.all()
+        return Product.objects.filter(pk=id)
 
     def resolve_all_products_by_category(root, info, category):
         if len(category):
